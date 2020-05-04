@@ -135,17 +135,10 @@ for i in tweets.index:
 
 #print(tweets.iloc[0,1])
 
-brasil = np.array(Image.open("mapa-brasil.png"))
-
-
-transformed_brasil_mask = np.ndarray((brasil.shape[0],brasil.shape[1]), np.int32)
-
-for i in range(len(brasil)):
-    transformed_brasil_mask[i] = list(map(transform_format, brasil[i]))
-
+brasil = np.load('mask.npy')
 print(len(bag_words))
 # width=600, height = 600
-wordcloud = WordCloud(background_color = 'white', mask = transformed_brasil_mask,max_words=1000).generate((" ").join(bag_words))
+wordcloud = WordCloud(background_color = 'white', mask = brasil, max_words=500).generate((" ").join(bag_words))
 
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
